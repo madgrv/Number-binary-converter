@@ -24,7 +24,7 @@ function binaryConvert(n) {
         reverse += string[i];
     }
     return reverse;
-}
+}```
 
 ## Usage
 
