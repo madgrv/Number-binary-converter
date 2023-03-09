@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            text-align: center;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: rgb(30, 30, 30);
+        }
+
+        h1 {
+            color: aquamarine;
+        }
+
+        p {
+            font-weight: bolder;
+            color: rgb(246, 255, 127);
+        }
+
+        input {
+            margin: 2%;
+            border: none;
+            border-bottom: 2px solid rgb(185, 185, 185);
+            background: transparent;
+            outline: none;
+            /* background-color: rgb(79, 79, 79); */
+            font-weight: bolder;
+            color: rgb(220, 116, 243);
+        }
+
+        .container {
+            margin-top: 50%;
+            margin-bottom: 50%;
+            /* background-color: rgb(61, 61, 61);
+            padding: 3%; */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="converter">
+            <h1>Convert a number to binary code</h1>
+            <input type="number" id="userInput" placeholder="Enter a number">
+            <p id="binaryDisplay"></p>
+        </div>
+    </div>
+    <script>
+        //I wanted to explore and recreate a function that converts an integer to binary code
+        //The process for the conversion is to repeatedly divide the number by 2,
+        //keeping track of the remainder at each step, until the number becomes 0.
+        //The remainders are then concatenated in reverse order to obtain the binary code. 
+        //his process is also known as "division by 2" or "successive halving".
+
+        //// The built in method to convert a number to binary code: ///
+        //  let numInt = 7;
+        //  console.log(numInt.toString(2));
+
+
+        //// My function with DOM manipulation to create a UI: ////
+
+        let binaryDisplay = document.getElementById("binaryDisplay");
+        
+        //A custom function to convert an integer to binary code
+        function binaryConvert() {
+            let userInput = document.getElementById("userInput");
+            let inputNum = Number(userInput.value);
+
+            //Create a string to store the modulus results
+            let string = "";
+            //Create a string to store the reversed final result
+            let reverse = "";
+
+            //Loop n times until n == 0
+            while (inputNum > 0) {
+                //Store modulus 2 reminder for both even and odd numberson each iteration
+                string += inputNum % 2;
+                //Divide n by 2 rounding to the lowest integer
+                inputNum = Math.floor(inputNum / 2);
+            }
+
+            //A loop to reverse the string order and obtain the binary result
+            for (let i = string.length - 1; i >= 0; i--) {
+                //Store the reversed string
+                reverse += string[i];
+            }
+
+            binaryDisplay.innerHTML = reverse;
+        }
+
+        let userInput = document.getElementById("userInput");
+        //Immediately display the result when user types
+        userInput.addEventListener("input", binaryConvert);
+
+
+        // // //Original function as component:
+        // function binaryConvert(n) {
+        // let string = "";
+        // let reverse = "";
+
+        // while (n > 0) {
+        //     string += n % 2;
+        //     n = Math.floor(n / 2);
+        // }
+
+        // // // return string.split("").reverse().join("")
+        // for (let i = string.length - 1; i >= 0; i--) {
+        //     reverse += string[i];
+        // }
+        // return reverse;
+        // }
+
+        // console.log(binaryConvert(13));
+
+    </script>
+</body>
+</html>
